@@ -1,13 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using api.Data;
+using api.Interfaces;
+using api.Repository;
 // using api.Interfaces;
-using api.Models;
+// using api.Models;
 // using api.Repository;
 // using api.Service;
 // using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
+// using Microsoft.AspNetCore.Identity;
 // using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+// using Microsoft.IdentityModel.Tokens;
 // using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ICommentRepository,CommentRepository>();
+builder.Services.AddScoped<IStockRepository,StockRepository>();
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

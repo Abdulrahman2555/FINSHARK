@@ -1,0 +1,1 @@
+[Route("api/[controller]")]=> هياخد اسم الكلاس تلقائيًا بدون كلمة "Controller"
