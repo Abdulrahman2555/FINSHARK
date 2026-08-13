@@ -2,6 +2,7 @@ using System ;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Dtos.Comment;
 using api.models;
 using api.Models;
 
@@ -19,6 +20,26 @@ namespace api.Mappers
                Content=commentModel.Content,
                CreatedOn=commentModel.CreatedOn,
                StockId=commentModel.StockId   
+            };
+            
+        }
+        public static Comment tocommentfromcreate(this CreateCommentDto commentDto ,int stockId)
+        {  
+            return new Comment
+            {
+               Title=commentDto.Title,
+               Content=commentDto.Content,
+               StockId=stockId   
+            };
+            
+        }
+        public static Comment tocommentfromupdate(this UpdateCommentRequestDto commentDto ,int stockId)
+        {  
+            return new Comment
+            {
+               Title=commentDto.Title,
+               Content=commentDto.Content,
+                
             };
             
         }

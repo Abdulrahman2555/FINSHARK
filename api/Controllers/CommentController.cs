@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Dtos.Comment;
 using api.Interfaces;
 using api.Mappers;
 using api.Models;
@@ -53,7 +54,58 @@ namespace api.Controllers
             return Ok(comment.tocommentdto());
             
         }
-        // [HttpPost]
+        [HttpPost]
+        public async Task<ActionResult> Create([FromRoute] int stockId,CreateCommentDto commentDto )
+        {
+            if(!await _stockRepo.StockExists(stockId))
+            {
+               return BadRequest ("Stock does not exist");     
+
+            }
+            var commentModel =commentDto.tocommentfromcreate(stockId);
+
+            await _ICommentRepo.CreateAsync(commentModel);
+
+            return CreatedAtAction(nameof(GetById),new{id=commentModel},commentModel.tocommentdto());
+        }
+         [HttpPut]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCommentRequestDto updateDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var comment = await _ICommentRepo.UpdateAsync(id, updateDto.tocommentfromupdate(id));
+
+            if (comment == null)
+            {
+                return NotFound("Comment not found");
+            }
+
+            return Ok(comment.tocommentdto());
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var commentModel = await _ICommentRepo.DeleteAsync(id);
+
+            if (commentModel == null)
+            {
+                return NotFound("Comment does not exist");
+            }
+
+            return Ok(commentModel);
+        }
         
     }
 }
+
+
+
+
+
