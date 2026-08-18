@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VGqhUXzw5t8=",
+  "dgSpecHash": "Fk1RpdCzovA=",
   "success": true,
   "projectFilePath": "C:\\Finshark\\api\\api.csproj",
   "expectedPackageFiles": [
@@ -69,7 +69,7 @@
     {
       "code": "NU1510",
       "level": "Warning",
-      "message": "PackageReference Microsoft.Extensions.Identity.Core will not be pruned. Consider removing this package from your dependencies, as it is likely unnecessary.",
+      "message": "PackageReference Microsoft.Extensions.Identity.Core will not be pruned. This package is automatically available and does not need to be referenced explicitly. Remove the PackageReference item.",
       "projectPath": "C:\\Finshark\\api\\api.csproj",
       "warningLevel": 1,
       "filePath": "C:\\Finshark\\api\\api.csproj",
